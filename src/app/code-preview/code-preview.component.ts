@@ -8,14 +8,30 @@ import { Component, OnInit } from '@angular/core';
 export class CodePreviewComponent implements OnInit {
 
   filename = '.bash_rc';
-  codeText = `#!/bin/bash
+  codeText = `import UIKit
 
-# Test comments with syntax highlighting
+class CityViewController: UITableViewController {
+    var city: City!
+    @IBOutlet weak var temperatureLabel: UILabel!
+    @IBOutlet weak var pressureLabel: UILabel!
+    @IBOutlet weak var humidityLabel: UILabel!
 
-git checkout master
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupLabels()
+    }
 
-echo 'test';
-  `;
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+
+    func setupLabels() {
+        navigationItem.title = city.name
+        temperatureLabel.text = String(format: "%.2f °K", city.temperature)
+        pressureLabel.text = String(format: "%.2f hpa", city.pressure)
+        humidityLabel.text = String(format: "%.2f %%", city.humidity)
+    }
+}`;
 
   constructor() { }
 

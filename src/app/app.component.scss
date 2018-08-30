@@ -1,9 +1,19 @@
 .center {
-  text-align:center
+  text-align: center;
 }
 
 .title {
   font-family: 'Satisfy', cursive;
   font-weight: 100;
   font-size: 4rem;
+}
+
+.code-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  cp-code-preview {
+    max-width: 968px;
+    width: 100%;
+  }
 }
