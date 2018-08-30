@@ -8,7 +8,15 @@ import { Component, OnInit } from '@angular/core';
 export class CodePreviewComponent implements OnInit {
 
   filename = '.bash_rc';
-  codeText = `$ git checkout master`;
+  codeText = `
+  // comment of something
+
+  class ThisClass {
+    something(boid) {
+
+    }
+  }
+  `;
 
   constructor() { }
 
