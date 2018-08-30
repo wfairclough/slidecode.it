@@ -539,7 +539,7 @@ if(false) {}
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/will/Development/SuiteSpot/slidecode-it/src/styles.scss */"./src/styles.scss");
+module.exports = __webpack_require__(/*! /Users/will/Development/slidecode.it/src/styles.scss */"./src/styles.scss");
 
 
 /***/ })

@@ -30,7 +30,7 @@ webpackEmptyAsyncContext.id = "./src/$$_lazy_route_resource lazy recursive";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n<div class=\"center\">\n  <h1 class=\"title\">\n    {{ title }}\n  </h1>\n</div>\n\n<div class=\"code-container\">\n  <cp-code-preview></cp-code-preview>\n</div>\n"
+module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n<div class=\"center\">\n  <h1 class=\"title\">\n    {{ title }}\n  </h1>\n</div>\n\n<div class=\"code-container\">\n  <select [(ngModel)]=\"language\">\n    <option *ngFor=\"let lang of supportedLanguages\">{{ lang }}</option>\n  </select>\n  <button (click)=\"toggleMode()\">{{ editMode ? 'Preview' : 'Edit' }}</button>\n  <cp-code-preview [mode]=\"mode\" [language]=\"language\"></cp-code-preview>\n</div>\n\n"
 
 /***/ }),
 
@@ -41,7 +41,7 @@ module.exports = "<!--The content below is only a placeholder and can be replace
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".center {\n  text-align: center; }\n\n.title {\n  font-family: 'Satisfy', cursive;\n  font-weight: 100;\n  font-size: 4rem; }\n\n.code-container {\n  display: flex;\n  justify-content: center;\n  width: 100%; }\n\n.code-container cp-code-preview {\n    max-width: 968px;\n    width: 100%; }\n"
+module.exports = ".center {\n  text-align: center; }\n\n.title {\n  font-family: 'Satisfy', cursive;\n  font-weight: 100;\n  font-size: 4rem; }\n\n.code-container {\n  display: flex;\n  justify-content: flex-start;\n  flex-direction: column;\n  align-items: center;\n  width: 100%; }\n\n.code-container * {\n    margin-bottom: 0.5rem; }\n\n.code-container cp-code-preview {\n    max-width: 968px;\n    width: 100%; }\n"
 
 /***/ }),
 
@@ -56,6 +56,7 @@ module.exports = ".center {\n  text-align: center; }\n\n.title {\n  font-family:
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppComponent", function() { return AppComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _code_preview_code_preview_body_code_preview_body_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./code-preview/code-preview-body/code-preview-body.component */ "./src/app/code-preview/code-preview-body/code-preview-body.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -63,10 +64,24 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 
+
 var AppComponent = /** @class */ (function () {
     function AppComponent() {
         this.title = 'SlideCode.it';
+        this.language = 'typescript';
+        this.supportedLanguages = _code_preview_code_preview_body_code_preview_body_component__WEBPACK_IMPORTED_MODULE_1__["SUPPORTED_LANGUAGES"];
+        this.editMode = true;
     }
+    Object.defineProperty(AppComponent.prototype, "mode", {
+        get: function () {
+            return this.editMode ? 'edit' : 'preview';
+        },
+        enumerable: true,
+        configurable: true
+    });
+    AppComponent.prototype.toggleMode = function () {
+        this.editMode = !this.editMode;
+    };
     AppComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-root',
@@ -151,6 +166,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm5/platform-browser.js");
 /* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
 /* harmony import */ var _code_preview_code_preview_module__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./code-preview/code-preview.module */ "./src/app/code-preview/code-preview.module.ts");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 /// <reference path="./../typings/index.d.ts" />
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -193,6 +209,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -201,6 +218,8 @@ var AppModule = /** @class */ (function () {
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_29__["BrowserModule"],
                 _code_preview_code_preview_module__WEBPACK_IMPORTED_MODULE_31__["CodePreviewModule"],
+                _angular_forms__WEBPACK_IMPORTED_MODULE_32__["FormsModule"],
+                _angular_forms__WEBPACK_IMPORTED_MODULE_32__["ReactiveFormsModule"],
             ],
             declarations: [
                 _app_component__WEBPACK_IMPORTED_MODULE_30__["AppComponent"],
@@ -226,7 +245,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ngx-prism [language]=\"language\" [code]=\"codeText\">\n</ngx-prism>\n"
+module.exports = "<ngx-prism [language]=\"language\" [code]=\"code\">\n</ngx-prism>\n"
 
 /***/ }),
 
@@ -253,6 +272,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SUPPORTED_LANGUAGES", function() { return SUPPORTED_LANGUAGES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CodePreviewBodyComponent", function() { return CodePreviewBodyComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var lodash_es__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash-es */ "./node_modules/lodash-es/lodash.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -263,39 +283,48 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
 var SUPPORTED_LANGUAGES = [
     'bash',
-    'clike',
     'c',
+    'clike',
     'cpp',
-    'java',
-    'scala',
     'dart',
     'diff',
-    'go',
-    'swift',
-    'erlang',
+    'docker',
     'elixir',
-    'kotlin',
+    'erlang',
+    'go',
     'haskell',
+    'html',
+    'java',
+    'kotlin',
+    'nginx',
     'objectivec',
-    'typescript',
-    'sass',
-    'scss',
+    'python',
+    'r',
     'ruby',
     'rust',
-    'python',
+    'sass',
+    'scala',
     'scheme',
+    'scss',
     'sql',
-    'r',
-    'nginx',
-    'docker',
+    'swift',
+    'typescript',
+    'xml',
     'yaml',
 ];
 var CodePreviewBodyComponent = /** @class */ (function () {
     function CodePreviewBodyComponent() {
         this.language = 'bash';
     }
+    CodePreviewBodyComponent.prototype.ngOnChanges = function (changes) {
+        if (changes.codeText || changes.language) {
+            console.log(changes.codeText);
+            this.code = lodash_es__WEBPACK_IMPORTED_MODULE_1__["clone"](this.codeText);
+        }
+    };
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
         __metadata("design:type", Object)
@@ -325,7 +354,7 @@ var CodePreviewBodyComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"mb6\">\n  <!---->\n  <div class=\"code-editor relative bg-gray8 lh-copy br3 pv3 ph3\">\n    <h3 class=\"header mt0 mb2 relative normal f3\">\n      <span aria-hidden=\"true\" class=\"absolute top--025 left-050\">\n        <span class=\"bg-red3 w075 h075 br-100 dib v-mid mr1\"></span>\n        <span class=\"bg-yellow3 w075 h075 br-100 dib v-mid mr1\"></span>\n        <span class=\"bg-green3 w075 h075 br-100 dib v-mid mr1\"></span>\n      </span>\n      <div class=\"flex flex-row flex-nowrap items-center justify-center flex-grow-1 gray5 fw6\">\n        <span class=\"ph3\"><i class=\"far fa-file-code\"></i></span>\n        <span class=\"ml2\">{{ filename }}</span>\n      </div>\n    </h3>\n    <div class=\"overflow-auto code overflow-auto code gray5 pa2\" style=\"\">\n      <div style=\"display: none;\">\n        {{ codeText }}\n      </div>\n      <cp-code-preview-body [codeText]=\"codeText\" language=\"swift\"></cp-code-preview-body>\n    </div>\n  </div>\n</div>\n"
+module.exports = "<div class=\"mb6\">\n  <div class=\"code-editor relative bg-gray8 lh-copy br3 pv3 ph3\">\n    <h3 class=\"header mt0 mb2 relative normal f3\">\n      <span aria-hidden=\"true\" class=\"absolute top--025 left-050\">\n        <span class=\"bg-red3 w075 h075 br-100 dib v-mid mr1\"></span>\n        <span class=\"bg-yellow3 w075 h075 br-100 dib v-mid mr1\"></span>\n        <span class=\"bg-green3 w075 h075 br-100 dib v-mid mr1\"></span>\n      </span>\n      <div class=\"flex flex-row flex-nowrap items-center justify-center flex-grow-1 gray5 fw6\">\n        <span class=\"ph3\"><i class=\"far fa-file-code\"></i></span>\n        <span class=\"ml2\" *ngIf=\"mode === 'preview'\">{{ filename }}</span>\n        <span class=\"ml2\" *ngIf=\"mode === 'edit'\"><input type=\"text\" [(ngModel)]=\"filename\" /></span>\n      </div>\n    </h3>\n    <div *ngIf=\"mode === 'preview'\" class=\"code gray5 pa2\">\n      <cp-code-preview-body [codeText]=\"code\" [language]=\"language\"></cp-code-preview-body>\n    </div>\n    <div *ngIf=\"mode === 'edit'\" class=\"code gray5\">\n      <textarea type=\"text\" [(ngModel)]=\"code\" rows=\"20\"></textarea>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -336,7 +365,7 @@ module.exports = "<div class=\"mb6\">\n  <!---->\n  <div class=\"code-editor rel
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".code-editor {\n  background-color: #343a40;\n  font-family: 'Montserrat', sans-serif; }\n\n.mt0 {\n  margin-top: 0; }\n\n.mb2 {\n  margin-bottom: .5rem; }\n\n.f3 {\n  font-size: 1rem; }\n\n.absolute {\n  position: absolute; }\n\n.left-050 {\n  left: .5rem; }\n\n.top--025 {\n  top: -0.25rem; }\n\n.normal {\n  font-weight: normal; }\n\n.v-mid {\n  vertical-align: middle; }\n\n.mr1 {\n  margin-right: .25rem; }\n\n.w075 {\n  width: 0.75rem; }\n\n.bg-red3 {\n  background-color: #ffa8a8; }\n\n.h075 {\n  height: .75rem; }\n\n.dib {\n  display: inline-block; }\n\n.br-100 {\n  border-radius: 100%; }\n\n.bg-yellow3 {\n  background-color: #ffe066; }\n\n.bg-green3 {\n  background-color: #8ce99a; }\n\n.gray5 {\n  color: #adb5bd; }\n\n.fw6 {\n  font-weight: 600; }\n\n.flex-grow-1 {\n  flex-grow: 1; }\n\n.justify-center {\n  justify-content: center; }\n\n.items-center {\n  align-items: center; }\n\n.flex-nowrap {\n  flex-wrap: nowrap; }\n\n.flex-row {\n  flex-direction: row; }\n\n.flex {\n  display: flex; }\n\n.lh-copy {\n  line-height: 1.5; }\n\n.br3 {\n  border-radius: .5rem; }\n\n.relative {\n  position: relative; }\n\n.ma0 {\n  margin: 0; }\n\n.ph3 {\n  padding-left: 1rem;\n  padding-right: 1rem; }\n\n.pv3 {\n  padding-top: 1rem;\n  padding-bottom: 1rem; }\n"
+module.exports = ".code-editor {\n  background-color: #343a40;\n  font-family: 'Montserrat', sans-serif; }\n  .code-editor textarea {\n    background-color: #343a40;\n    font-family: 'Montserrat', sans-serif;\n    color: #adb5bd;\n    font-size: 1rem;\n    border: none;\n    width: calc(100% - 2rem);\n    padding: 1rem; }\n  .code-editor textarea:focus {\n    border: none;\n    outline: none; }\n  .mt0 {\n  margin-top: 0; }\n  .mb2 {\n  margin-bottom: .5rem; }\n  .f3 {\n  font-size: 1rem; }\n  .absolute {\n  position: absolute; }\n  .left-050 {\n  left: .5rem; }\n  .top--025 {\n  top: -0.25rem; }\n  .normal {\n  font-weight: normal; }\n  .v-mid {\n  vertical-align: middle; }\n  .mr1 {\n  margin-right: .25rem; }\n  .w075 {\n  width: 0.75rem; }\n  .bg-red3 {\n  background-color: #ffa8a8; }\n  .h075 {\n  height: .75rem; }\n  .dib {\n  display: inline-block; }\n  .br-100 {\n  border-radius: 100%; }\n  .bg-yellow3 {\n  background-color: #ffe066; }\n  .bg-green3 {\n  background-color: #8ce99a; }\n  .gray5 {\n  color: #adb5bd; }\n  .fw6 {\n  font-weight: 600; }\n  .flex-grow-1 {\n  flex-grow: 1; }\n  .justify-center {\n  justify-content: center; }\n  .items-center {\n  align-items: center; }\n  .flex-nowrap {\n  flex-wrap: nowrap; }\n  .flex-row {\n  flex-direction: row; }\n  .flex {\n  display: flex; }\n  .lh-copy {\n  line-height: 1.5; }\n  .br3 {\n  border-radius: .5rem; }\n  .relative {\n  position: relative; }\n  .ma0 {\n  margin: 0; }\n  .ph3 {\n  padding-left: 1rem;\n  padding-right: 1rem; }\n  .pv3 {\n  padding-top: 1rem;\n  padding-bottom: 1rem; }\n"
 
 /***/ }),
 
@@ -363,11 +392,28 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 var CodePreviewComponent = /** @class */ (function () {
     function CodePreviewComponent() {
+        this.mode = 'edit';
+        this.language = 'typescript'; // SUPPORTED_LANGUAGES[0];
         this.filename = '.bash_rc';
-        this.codeText = "import UIKit\n\nclass CityViewController: UITableViewController {\n    var city: City!\n    @IBOutlet weak var temperatureLabel: UILabel!\n    @IBOutlet weak var pressureLabel: UILabel!\n    @IBOutlet weak var humidityLabel: UILabel!\n\n    override func viewDidLoad() {\n        super.viewDidLoad()\n        setupLabels()\n    }\n\n    override func didReceiveMemoryWarning() {\n        super.didReceiveMemoryWarning()\n    }\n\n    func setupLabels() {\n        navigationItem.title = city.name\n        temperatureLabel.text = String(format: \"%.2f \u00B0K\", city.temperature)\n        pressureLabel.text = String(format: \"%.2f hpa\", city.pressure)\n        humidityLabel.text = String(format: \"%.2f %%\", city.humidity)\n    }\n}";
+        this.code = "";
     }
-    CodePreviewComponent.prototype.ngOnInit = function () {
+    CodePreviewComponent.prototype.ngOnInit = function () { };
+    CodePreviewComponent.prototype.ngOnChanges = function (changes) {
+        if (changes.mode) {
+            console.log("Code", this.code);
+        }
     };
+    CodePreviewComponent.prototype.log = function () {
+        console.log(this.code);
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", String)
+    ], CodePreviewComponent.prototype, "mode", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Object)
+    ], CodePreviewComponent.prototype, "language", void 0);
     CodePreviewComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'cp-code-preview',
@@ -395,15 +441,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CodePreviewModule", function() { return CodePreviewModule; });
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _ngx_prism_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ngx-prism/core */ "./node_modules/@ngx-prism/core/dist/index.js");
-/* harmony import */ var _code_preview_body_code_preview_body_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./code-preview-body/code-preview-body.component */ "./src/app/code-preview/code-preview-body/code-preview-body.component.ts");
-/* harmony import */ var _code_preview_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./code-preview.component */ "./src/app/code-preview/code-preview.component.ts");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _ngx_prism_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ngx-prism/core */ "./node_modules/@ngx-prism/core/dist/index.js");
+/* harmony import */ var _code_preview_body_code_preview_body_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./code-preview-body/code-preview-body.component */ "./src/app/code-preview/code-preview-body/code-preview-body.component.ts");
+/* harmony import */ var _code_preview_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./code-preview.component */ "./src/app/code-preview/code-preview.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -416,16 +464,18 @@ var CodePreviewModule = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
             imports: [
                 _angular_common__WEBPACK_IMPORTED_MODULE_0__["CommonModule"],
-                _ngx_prism_core__WEBPACK_IMPORTED_MODULE_2__["PrismModule"],
+                _ngx_prism_core__WEBPACK_IMPORTED_MODULE_3__["PrismModule"],
+                _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"],
+                _angular_forms__WEBPACK_IMPORTED_MODULE_2__["ReactiveFormsModule"],
             ],
             declarations: [
-                _code_preview_component__WEBPACK_IMPORTED_MODULE_4__["CodePreviewComponent"],
-                _code_preview_body_code_preview_body_component__WEBPACK_IMPORTED_MODULE_3__["CodePreviewBodyComponent"],
+                _code_preview_component__WEBPACK_IMPORTED_MODULE_5__["CodePreviewComponent"],
+                _code_preview_body_code_preview_body_component__WEBPACK_IMPORTED_MODULE_4__["CodePreviewBodyComponent"],
             ],
             entryComponents: [],
             exports: [
-                _code_preview_component__WEBPACK_IMPORTED_MODULE_4__["CodePreviewComponent"],
-                _code_preview_body_code_preview_body_component__WEBPACK_IMPORTED_MODULE_3__["CodePreviewBodyComponent"],
+                _code_preview_component__WEBPACK_IMPORTED_MODULE_5__["CodePreviewComponent"],
+                _code_preview_body_code_preview_body_component__WEBPACK_IMPORTED_MODULE_4__["CodePreviewBodyComponent"],
             ],
         })
     ], CodePreviewModule);
@@ -496,7 +546,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/will/Development/SuiteSpot/slidecode-it/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /Users/will/Development/slidecode.it/src/main.ts */"./src/main.ts");
 
 
 /***/ })
