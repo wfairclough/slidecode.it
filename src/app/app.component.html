@@ -6,5 +6,10 @@
 </div>
 
 <div class="code-container">
-  <cp-code-preview></cp-code-preview>
+  <select [(ngModel)]="language">
+    <option *ngFor="let lang of supportedLanguages">{{ lang }}</option>
+  </select>
+  <button (click)="toggleMode()">{{ editMode ? 'Preview' : 'Edit' }}</button>
+  <cp-code-preview [mode]="mode" [language]="language"></cp-code-preview>
 </div>
+

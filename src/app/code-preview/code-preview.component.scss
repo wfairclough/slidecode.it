@@ -7,6 +7,21 @@
   h3.header {
 
   }
+  
+  textarea {
+    background-color: $editor-bg-color;
+    font-family: 'Montserrat', sans-serif;
+    color: #adb5bd;
+    font-size: 1rem;
+    border: none;
+    width: calc(100% - 2rem);
+    padding: 1rem;
+  }
+  
+  textarea:focus {
+    border:none;
+    outline: none;
+  }
 }
 
 .mt0 {
@@ -49,7 +64,7 @@
 }
 
 .bg-red3 {
-  background-color: #ffa8a8;
+  background-color: $close-btn-color;
 }
 
 .h075 {
@@ -65,11 +80,11 @@
 }
 
 .bg-yellow3 {
-  background-color: #ffe066;
+  background-color: $min-btn-color;
 }
 
 .bg-green3 {
-  background-color: #8ce99a;
+  background-color: $max-btn-color;
 }
 
 .gray5 {

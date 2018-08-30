@@ -1,32 +1,35 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import * as _ from 'lodash-es';
 
 export const SUPPORTED_LANGUAGES = [
   'bash',
-  'clike',
   'c',
+  'clike',
   'cpp',
-  'java',
-  'scala',
   'dart',
   'diff',
-  'go',
-  'swift',
-  'erlang',
+  'docker',
   'elixir',
-  'kotlin',
+  'erlang',
+  'go',
   'haskell',
+  'html',
+  'java',
+  'kotlin',
+  'nginx',
   'objectivec',
-  'typescript',
-  'sass',
-  'scss',
+  'python',
+  'r',
   'ruby',
   'rust',
-  'python',
+  'sass',
+  'scala',
   'scheme',
+  'scss',
   'sql',
-  'r',
-  'nginx',
-  'docker',
+  'swift',
+  'typescript',
+  'xml',
   'yaml',
 ];
 
@@ -35,9 +38,18 @@ export const SUPPORTED_LANGUAGES = [
   templateUrl: './code-preview-body.component.html',
   styleUrls: ['./code-preview-body.component.scss']
 })
-export class CodePreviewBodyComponent {
+export class CodePreviewBodyComponent implements OnChanges {
 
   @Input() language = 'bash';
   @Input() codeText: string;
+
+  code: string;
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.codeText || changes.language) {
+      console.log(changes.codeText);
+      this.code = _.clone(this.codeText);
+    }
+  }
 
 }

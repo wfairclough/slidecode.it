@@ -1,5 +1,4 @@
 <div class="mb6">
-  <!---->
   <div class="code-editor relative bg-gray8 lh-copy br3 pv3 ph3">
     <h3 class="header mt0 mb2 relative normal f3">
       <span aria-hidden="true" class="absolute top--025 left-050">
@@ -9,14 +8,15 @@
       </span>
       <div class="flex flex-row flex-nowrap items-center justify-center flex-grow-1 gray5 fw6">
         <span class="ph3"><i class="far fa-file-code"></i></span>
-        <span class="ml2">{{ filename }}</span>
+        <span class="ml2" *ngIf="mode === 'preview'">{{ filename }}</span>
+        <span class="ml2" *ngIf="mode === 'edit'"><input type="text" [(ngModel)]="filename" /></span>
       </div>
     </h3>
-    <div class="overflow-auto code overflow-auto code gray5 pa2" style="">
-      <div style="display: none;">
-        {{ codeText }}
-      </div>
-      <cp-code-preview-body [codeText]="codeText" language="swift"></cp-code-preview-body>
+    <div *ngIf="mode === 'preview'" class="code gray5 pa2">
+      <cp-code-preview-body [codeText]="code" [language]="language"></cp-code-preview-body>
+    </div>
+    <div *ngIf="mode === 'edit'" class="code gray5">
+      <textarea type="text" [(ngModel)]="code" rows="20"></textarea>
     </div>
   </div>
 </div>
