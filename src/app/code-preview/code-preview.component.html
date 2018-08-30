@@ -1,0 +1,24 @@
+<div class="mb6">
+  <!---->
+  <div class="code-editor relative bg-gray8 lh-copy br3 pv3 ph3">
+    <h3 class="header mt0 mb2 relative normal f3">
+      <span aria-hidden="true" class="absolute top--025 left-050">
+        <span class="bg-red3 w075 h075 br-100 dib v-mid mr1"></span>
+        <span class="bg-yellow3 w075 h075 br-100 dib v-mid mr1"></span>
+        <span class="bg-green3 w075 h075 br-100 dib v-mid mr1"></span>
+      </span>
+      <div class="flex flex-row flex-nowrap items-center justify-center flex-grow-1 gray5 fw6">
+        <span class="ph3"><i class="far fa-file-code"></i></span>
+        <span class="ml2">{{ filename }}</span>
+      </div>
+    </h3>
+    <div class="overflow-auto code overflow-auto code gray5 pa2" style="">
+      <div style="display: none;">
+        {{ codeText }}
+      </div>
+      <pre class="ma0 body">
+        <code class="gray5">{{ codeText }}</code>
+      </pre>
+    </div>
+  </div>
+</div>
